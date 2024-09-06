@@ -48,12 +48,16 @@ function numberToText(num) {
   return words.trim();
 }
 
+function capitalizeFirstLetter(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 function numberWithText(num) {
   const parts = num.toFixed(2).split('.');
   const integerPart = parseInt(parts[0], 10);
   const decimalPart = parts[1] ? parseInt(parts[1], 10) : 0;
 
-  let result = numberToText(integerPart);
+  let result = capitalizeFirstLetter(numberToText(integerPart));
   let formattedNumber = num.toFixed(2).replace('.', ',');
 
   if (decimalPart > 0) {
