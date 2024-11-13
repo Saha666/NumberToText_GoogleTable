@@ -1,5 +1,5 @@
 function convertHours() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Имя вашего листа"); // Замените на имя вашего листа
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("csv"); // Замените на имя вашего листа
   if (!sheet) {
     Logger.log("Лист не найден!");
     return;
