@@ -60,9 +60,13 @@ function numberWithText(num) {
   let result = capitalizeFirstLetter(numberToText(integerPart));
   let formattedNumber = num.toFixed(2).replace('.', ',');
 
+  // Форматируем копейки с ведущим нулем, если их меньше 10
+  let decimalFormatted = decimalPart < 10 ? `0${decimalPart}` : decimalPart;
+
   if (decimalPart > 0) {
-    return `${formattedNumber} (${result}) грн. ${decimalPart} коп. без ПДВ`;
+    return `${formattedNumber} (${result}) грн. ${decimalFormatted} коп. без ПДВ`;
   } else {
     return `${formattedNumber} (${result}) грн. 00 коп. без ПДВ`;
   }
 }
+//by saha
