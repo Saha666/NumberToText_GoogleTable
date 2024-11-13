@@ -1,4 +1,15 @@
 function convertHours() {
+  // Запрашиваем подтверждение у пользователя
+  var ui = SpreadsheetApp.getUi(); // Интерфейс пользователя
+  var response = ui.alert("Подтверждение", "Вы уверены, что хотите преобразовать данные в столбце Hours?", ui.ButtonSet.YES_NO);
+
+  // Если пользователь выбрал "Нет", то останавливаем выполнение скрипта
+  if (response !== ui.Button.YES) {
+    ui.alert("Операция отменена пользователем.");
+    return;
+  }
+  
+  // Основная часть скрипта
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("csv"); // Замените на имя вашего листа
   if (!sheet) {
     Logger.log("Лист не найден!");
@@ -29,5 +40,5 @@ function convertHours() {
   Logger.log("Данные обновлены.");
 
   // Показываем сообщение по завершении
-  Browser.msgBox("Обработка завершена!");
+  ui.alert("Обработка завершена!");
 }
