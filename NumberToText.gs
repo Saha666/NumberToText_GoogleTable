@@ -64,9 +64,8 @@ function numberWithText(num) {
   let decimalFormatted = decimalPart < 10 ? `0${decimalPart}` : decimalPart;
 
   if (decimalPart > 0) {
-    return `${formattedNumber} (${result}) грн. ${decimalFormatted} коп. без ПДВ`;
+    return `${formattedNumber} грн. (${result}) грн. ${decimalFormatted} коп. без ПДВ`;
   } else {
-    return `${formattedNumber} (${result}) грн. 00 коп. без ПДВ`;
+    return `${formattedNumber} грн. (${result}) грн. 00 коп. без ПДВ`;
   }
 }
-//by saha
