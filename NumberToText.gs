@@ -4,9 +4,6 @@ function numberToText(num) {
   const tens = ['', '', 'двадцять', 'тридцять', 'сорок', 'п’ятдесят', 'шістдесят', 'сімдесят', 'вісімдесят', 'дев’яносто'];
   const hundreds = ['', 'сто', 'двісті', 'триста', 'чотириста', 'п’ятсот', 'шістсот', 'сімсот', 'вісімсот', 'дев’ятсот'];
 
-  const units = ['', 'тисяча', 'мільйон', 'мільярд'];
-  const scales = ['', 'тисячі', 'мільйона', 'мільярда'];
-
   if (num === 0) return 'нуль';
 
   let words = '';
@@ -18,28 +15,24 @@ function numberToText(num) {
       let part = '';
       part += hundreds[Math.floor(remainder / 100)];
       remainder %= 100;
+
       if (remainder >= 10 && remainder <= 19) {
         part += (part ? ' ' : '') + teens[remainder - 10];
       } else {
         part += (part ? ' ' : '') + tens[Math.floor(remainder / 10)];
-        remainder %= 10;
-        part += (part ? ' ' : '') + (partCount === 1 && remainder === 1 ? 'одна' : (partCount === 1 && remainder === 2 ? 'дві' : ones[remainder]));
-      }
+        const lastDigit = remainder % 10;
 
-      let unit = '';
-      if (partCount === 1) {
-        if (remainder === 1) {
-          unit = 'тисяча';
-        } else if (remainder >= 2 && remainder <= 4) {
-          unit = 'тисячі';
+        // Исправление для чисел 1 и 2
+        if (lastDigit === 1 && partCount === 0) {
+          part += (part ? ' ' : '') + 'одна'; // Для 1 в начале
+        } else if (lastDigit === 2 && partCount === 0) {
+          part += (part ? ' ' : '') + 'дві'; // Для 2 в начале
         } else {
-          unit = 'тисяч';
+          part += (part ? ' ' : '') + ones[lastDigit];
         }
-      } else if (partCount > 1) {
-        unit = units[partCount];
       }
 
-      words = part + ' ' + unit + (words ? ' ' + words : '');
+      words = part + (words ? ' ' + words : '');
     }
     num = Math.floor(num / 1000);
     partCount++;
@@ -60,7 +53,6 @@ function numberWithText(num) {
   let result = capitalizeFirstLetter(numberToText(integerPart));
   let formattedNumber = num.toFixed(2).replace('.', ',');
 
-  // Форматируем копейки с ведущим нулем, если их меньше 10
   let decimalFormatted = decimalPart < 10 ? `0${decimalPart}` : decimalPart;
 
   if (decimalPart > 0) {
@@ -69,3 +61,4 @@ function numberWithText(num) {
     return `${formattedNumber} грн. (${result}) грн. 00 коп. без ПДВ`;
   }
 }
+//by saha
