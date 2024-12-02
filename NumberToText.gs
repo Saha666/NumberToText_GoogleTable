@@ -32,6 +32,19 @@ function numberToText(num) {
         }
       }
 
+      // Обработка слов для тысяч
+      if (partCount === 1) {
+        const lastDigit = Math.floor(remainder % 10);
+        const isTeens = remainder >= 10 && remainder <= 19;
+        if (lastDigit === 1 && !isTeens) {
+          part += (part ? ' ' : '') + 'тисяча';
+        } else if (lastDigit >= 2 && lastDigit <= 4 && !isTeens) {
+          part += (part ? ' ' : '') + 'тисячі';
+        } else {
+          part += (part ? ' ' : '') + 'тисяч';
+        }
+      }
+
       words = part + (words ? ' ' + words : '');
     }
     num = Math.floor(num / 1000);
