@@ -23,10 +23,10 @@ function numberToText(num) {
         const lastDigit = remainder % 10;
 
         // Исправление для чисел 1 и 2
-        if (lastDigit === 1 && partCount === 0) {
-          part += (part ? ' ' : '') + 'одна'; // Для 1 в начале
-        } else if (lastDigit === 2 && partCount === 0) {
-          part += (part ? ' ' : '') + 'дві'; // Для 2 в начале
+        if (lastDigit === 1 && partCount === 1) {
+          part += (part ? ' ' : '') + 'одна'; // Для "одна тисяча"
+        } else if (lastDigit === 2 && partCount === 1) {
+          part += (part ? ' ' : '') + 'дві'; // Для "дві тисячі"
         } else {
           part += (part ? ' ' : '') + ones[lastDigit];
         }
@@ -74,4 +74,3 @@ function numberWithText(num) {
     return `${formattedNumber} грн. (${result}) грн. 00 коп. без ПДВ`;
   }
 }
-//by saha
